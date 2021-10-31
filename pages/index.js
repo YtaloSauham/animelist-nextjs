@@ -6,7 +6,7 @@ import styles from '../styles/Home.module.css'
 const url='https://kitsu.io/api/edge/';
 
 export default function Home() {
-  const[seachAnime,setSeachAnime]=useState('');
+  const[seachAnime,setSeachAnime]=useState('Naruto');
   const[photos,setPhotos]=useState([])
 
   useEffect(()=>{
@@ -21,11 +21,14 @@ export default function Home() {
 
 
   function photosRender(){
-
-   return photos?.map((photos)=>{
-      <li key={photos.id}>{photos.id}</li>
+    if(photos.length >0)
+  return photos.data.map((anime)=>{
+     <li key={anime.id}><img
+     src={anime.attributes.posterImage.small}
+     alt={anime.attributes.canonicalTitle}
+   /></li>
     })
- 
+    
    }
   
 
@@ -35,13 +38,22 @@ export default function Home() {
         <title>Electron e NextJS</title>
       </Head>
       teste
-      <ul>
-        {photosRender()}
-      </ul> 
-      {console.log(photos)}
-     
-      
+      {/* {seachAnime && !photos.data && <span>Carregando...</span>} */}
+      {/* {photos.data && (
+        <ul className="animes-list">
+          {photos.data.map((anime) => (
+            <li key={anime.id}>
+              <img
+                src={anime.attributes.posterImage.small}
+                alt={anime.attributes.canonicalTitle}
+              />
+              {anime.attributes.canonicalTitle}
+            </li>
+          ))}
+        </ul>
+      )} */}
 
+      {photosRender}
     </div>
   )
 
