@@ -21,13 +21,13 @@ export default function Home() {
 
 
   function photosRender(){
-    if(photos.length >0)
-  return photos.data.map((anime)=>{
-     <li key={anime.id}><img
+  return photos.data && photos?.data.map((anime)=>{
+     return <li key={anime.id}><img
      src={anime.attributes.posterImage.small}
      alt={anime.attributes.canonicalTitle}
    /></li>
     })
+    
     
    }
   
@@ -53,7 +53,7 @@ export default function Home() {
         </ul>
       )} */}
 
-      {photosRender}
+      {photosRender()}
     </div>
   )
 
