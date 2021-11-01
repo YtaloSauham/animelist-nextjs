@@ -3,20 +3,24 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
 import { Container } from 'react-bootstrap'
+import SearchInput  from '../src/components/SeachInput'
 const url='https://kitsu.io/api/edge/';
 
 export default function Home() {
-  const[seachAnime,setSeachAnime]=useState('Dragon ball');
-  const[photos,setPhotos]=useState([])
+  const[seachAnime,setSeachAnime]=useState('');
+  const[photos,setPhotos]=useState({})
 
   useEffect(()=>{
+    if(seachAnime){
+      setPhotos({})
     fetch(`${url}anime?filter[text]=${seachAnime}&page[limit]=12`)    
-       .then((res)=>res.json())
-       .then((res)=>{
-        setPhotos(res)
-       })
-       .catch((err)=>{console.log(err)})
-        
+    .then((res)=>res.json())
+    .then((res)=>{
+     setPhotos(res)
+    })
+    .catch((err)=>{console.log(err)})
+     }
+    
    },[seachAnime])
 
 
@@ -26,8 +30,6 @@ export default function Home() {
      <Container>
     <li key={anime.id}><img src={anime.attributes.posterImage.small} alt={anime.attributes.canonicalTitle}/>{anime.attributes.canonicalTitle}</li></Container></>)
     })
-    
-    
    }
   
 
@@ -36,8 +38,8 @@ export default function Home() {
       <Head>
         <title>Electron e NextJS</title>
       </Head>
-      <input value={seachAnime} onChange={(e)=>{setSeachAnime(e.target.value)}}/>
-      {/* {seachAnime && !photos.data && <span>Carregando...</span>} */}
+      <SearchInput value={seachAnime} onChange={(e)=>{setSeachAnime(e)}}/>
+      {seachAnime && !photos.data && <span>Carregando...</span>} 
       {/* {photos.data && (
         <ul className="animes-list">
           {photos.data.map((anime) => (
