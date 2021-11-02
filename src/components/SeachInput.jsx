@@ -14,7 +14,8 @@ import useDebounce from './useDebounce';
 
     return(
         <>
-        <input type="search" value={visualDisplay} onChange={handleChange} />
+        
+        <input type="search" placeholder="Ex:NARUTO" value={visualDisplay} onChange={handleChange} />
 
         </>
     )

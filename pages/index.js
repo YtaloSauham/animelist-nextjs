@@ -4,19 +4,20 @@ import { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
 import { Container } from 'react-bootstrap'
 import SearchInput  from '../src/components/SeachInput'
+
 const url='https://kitsu.io/api/edge/';
 
 export default function Home() {
   const[seachAnime,setSeachAnime]=useState('');
-  const[photos,setPhotos]=useState({})
+  const[anime,setAnime]=useState({})
 
   useEffect(()=>{
     if(seachAnime){
-      setPhotos({})
+      setAnime({})
     fetch(`${url}anime?filter[text]=${seachAnime}&page[limit]=12`)    
     .then((res)=>res.json())
     .then((res)=>{
-     setPhotos(res)
+     setAnime(res)
     })
     .catch((err)=>{console.log(err)})
      }
@@ -24,38 +25,34 @@ export default function Home() {
    },[seachAnime])
 
 
-  function photosRender(){
-  return photos.data && photos?.data.map((anime)=>{
+  function animeRender(){
+  return anime.data && anime?.data.map((anime)=>{
      return(<>
-     <Container>
-    <li key={anime.id}><img src={anime.attributes.posterImage.small} alt={anime.attributes.canonicalTitle}/>{anime.attributes.canonicalTitle}</li></Container></>)
+     
+    <li key={anime.id}><img src={anime.attributes.posterImage.small} alt={anime.attributes.canonicalTitle}/>{anime.attributes.canonicalTitle}</li></>)
     })
    }
   
 
   return (
-    <div >
+    <div className={styles.main}>
       <Head>
-        <title>Electron e NextJS</title>
+        <title>Animes List Seac</title>
       </Head>
+      <div className={styles.seachInput}>
       <SearchInput value={seachAnime} onChange={(e)=>{setSeachAnime(e)}}/>
-      {seachAnime && !photos.data && <span>Carregando...</span>} 
-      {/* {photos.data && (
-        <ul className="animes-list">
-          {photos.data.map((anime) => (
-            <li key={anime.id}>
-              <img
-                src={anime.attributes.posterImage.small}
-                alt={anime.attributes.canonicalTitle}
-              />
-              {anime.attributes.canonicalTitle}
-            </li>
-          ))}
-        </ul>
-      )} */}
+      </div>
+      {seachAnime && !anime.data && <span>Carregando...</span>} 
+      <div className={styles.anime_Container}>
 
-      {photosRender()}
+      {animeRender()}
+      </div>
+      
     </div>
   )
 
 }
+
+
+
+//Paginação
