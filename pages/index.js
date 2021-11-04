@@ -6,7 +6,7 @@ import { Container } from 'react-bootstrap'
 import SearchInput  from '../src/components/SeachInput'
 
 const url='https://kitsu.io/api/edge/';
-
+const baseUrl="https://kitsu.io/api/edge/anime?page[limit]=12"
 export default function Home() {
   const[seachAnime,setSeachAnime]=useState('');
   const[anime,setAnime]=useState({})
@@ -21,6 +21,14 @@ export default function Home() {
     })
     .catch((err)=>{console.log(err)})
      }
+     else{
+        fetch(baseUrl)
+        .then((res)=>res.json())
+        .then((res)=>{
+        setAnime(res)
+     })
+     .catch((err)=>{console.log(err)})
+    }
     
    },[seachAnime])
 
