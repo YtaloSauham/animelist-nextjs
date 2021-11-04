@@ -1,5 +1,19 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+
+
+## AnimeList 
+Projeto tem como base uma integracao com uma API que contem uma lista de animes.
+
+
+## Objetivo
+Solidificar conhecimentos ja em next e integracao de APIs
+
+
+## Imagens do Projeto
+
+![foto1](https://user-images.githubusercontent.com/85992772/140241787-a5bbf75a-38fc-4249-a8b4-533ce748565a.png)
+
 ## Getting Started
 
 First, run the development server:
