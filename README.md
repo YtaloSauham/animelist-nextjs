@@ -7,7 +7,7 @@ Projeto tem como base uma integracao com uma API que contem uma lista de animes.
 
 
 ## Objetivo
-Solidificar conhecimentos ja em next e integracao de APIs
+Solidificar conhecimentos em next e integracao de APIs
 
 
 ## Imagens do Projeto
